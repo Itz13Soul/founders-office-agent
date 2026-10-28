@@ -50,6 +50,13 @@ async function postJson(url: string, headers: Record<string, string>, body: unkn
   throw lastErr;
 }
 
+function thinking(model: string): Record<string, unknown> {
+  if (/2\.5-flash/.test(model)) return { thinkingConfig: { thinkingBudget: 0 } };
+  if (/2\.5-pro/.test(model)) return { thinkingConfig: { thinkingBudget: 128 } };
+  if (/gemini-3/.test(model)) return { thinkingConfig: { thinkingLevel: "low" } };
+  return {};
+}
+
 async function callGemini({ system, user }: Req): Promise<string> {
   const key = requireEnv("GEMINI_API_KEY");
   const primary = requireEnv("GEMINI_MODEL");
@@ -70,7 +77,7 @@ async function callGemini({ system, user }: Req): Promise<string> {
           generationConfig: {
             responseMimeType: "application/json",
             temperature: 0,
-            ...(/2\.5-flash/.test(model) ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+            ...thinking(model),
           },
         },
       );
