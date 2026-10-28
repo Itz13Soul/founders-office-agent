@@ -31,7 +31,7 @@ The sample mailbox has 30 short synthetic emails with hand-written labels. A pro
 
 ## Deployment
 
-Deploy on Vercel with the variables listed in `.env.example`.
+Deploy on Vercel with the variables listed in `.env.example`. Run `npm run build` locally to verify first.
 
 ## Notice
 
