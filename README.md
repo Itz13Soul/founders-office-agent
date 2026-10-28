@@ -29,6 +29,10 @@ The sample mailbox has 30 short synthetic emails with hand-written labels. A pro
 
 `npm run typecheck`, `npm run lint`, `npm test`, `npm run secret-scan`.
 
+## Deployment
+
+Deploy on Vercel with the variables listed in `.env.example`.
+
 ## Notice
 
 Model output is a suggestion to verify. Not legal or financial advice. The demo does not connect to anyone's inbox.
