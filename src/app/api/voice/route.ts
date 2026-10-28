@@ -2,7 +2,7 @@ import { z } from "zod";
 import { parseVoice } from "../../../lib/voice";
 import { clientError, guard } from "../../../lib/usage";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const Body = z.object({ transcript: z.string().trim().min(6).max(600) });
 

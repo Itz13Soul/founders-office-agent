@@ -2,7 +2,7 @@ import { z } from "zod";
 import { extractFromText } from "../../../lib/ledger";
 import { clientError, guard } from "../../../lib/usage";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const Body = z.object({
   text: z.string().trim().min(20).max(1500),

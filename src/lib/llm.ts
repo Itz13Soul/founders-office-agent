@@ -22,7 +22,7 @@ async function sleep(ms: number) {
 
 type JsonBody = Record<string, unknown>;
 
-const BUDGET_MS = 50000;
+const BUDGET_MS = 52000;
 let deadline = 0;
 
 async function postJson(url: string, headers: Record<string, string>, body: unknown): Promise<JsonBody> {
@@ -67,7 +67,11 @@ async function callGemini({ system, user }: Req): Promise<string> {
         {
           systemInstruction: { parts: [{ text: system }] },
           contents: [{ role: "user", parts: [{ text: user }] }],
-          generationConfig: { responseMimeType: "application/json", temperature: 0 },
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0,
+            ...(/2\.5-flash/.test(model) ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+          },
         },
       );
       const candidates = data.candidates as { content?: { parts?: { text?: string }[] } }[] | undefined;

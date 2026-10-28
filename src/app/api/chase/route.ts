@@ -2,7 +2,7 @@ import { z } from "zod";
 import { draftChase } from "../../../lib/chase";
 import { clientError, guard } from "../../../lib/usage";
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 const Body = z.object({
   owner: z.string().trim().min(2).max(80),

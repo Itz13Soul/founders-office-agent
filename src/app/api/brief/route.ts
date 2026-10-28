@@ -4,7 +4,7 @@ import { clientError, guard } from "../../../lib/usage";
 import { supabaseAnon } from "../../../lib/supabase";
 import type { Commitment } from "../../../lib/ledger";
 
-export const maxDuration = 45;
+export const maxDuration = 60;
 
 export async function POST() {
   const db = supabaseAnon();
