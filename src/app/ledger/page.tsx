@@ -3,8 +3,15 @@ import LedgerView, { type Row } from "../../components/LedgerView";
 import { SampleNotice } from "../../components/Notice";
 import TryExtract from "../../components/TryExtract";
 import { statusOf, daysOverdue, type Commitment } from "../../lib/ledger";
-import { ASOF, EMAILS } from "../../lib/sample";
+import { ASOF, EMAILS, PEOPLE } from "../../lib/sample";
 import { supabaseAnon } from "../../lib/supabase";
+
+const FULL = Object.values(PEOPLE);
+
+function canonicalOwner(name: string): string {
+  const first = name.trim().split(" ")[0].toLowerCase();
+  return FULL.find((f) => f.toLowerCase().split(" ")[0] === first) ?? name;
+}
 
 export const metadata: Metadata = { title: "Ledger | Founder's Office Agent" };
 export const revalidate = 300;
@@ -20,7 +27,7 @@ export default async function Ledger() {
       const status = statusOf(c.due);
       rows.push({
         key: `${e.id}-${i}`,
-        owner: c.owner,
+        owner: canonicalOwner(c.owner),
         what: c.what,
         due: c.due,
         quote: c.quote,

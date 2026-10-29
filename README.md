@@ -16,6 +16,10 @@ Tools such as Superhuman, Shortwave and Fyxer draft and triage email. This proje
 
 The sample mailbox has 30 short synthetic emails with hand-written labels. A promise counts as found when owner, due date and key words match. Results are stored by the admin console and published on the Method page. The plan's target of 100 labelled emails is not met; the set is smaller and easier than real mail, so scores are early.
 
+### Result (29 Oct 2026)
+
+On the 30 sample emails (25 labelled promises), with a Gemini Flash model: **recall 88% (22 of 25), precision 76% (22 of 29)**. This is below the plan's 90% recall target. All three misses are relative-date resolutions ("end of next week", "this week", "Wednesday") where the model chose a different date from the label. The extra 7 predictions are mostly requests and statements of terms that were not labelled as promises. The prompt was not tuned on this set, so the figure is a first measurement, not a best case.
+
 ## Setup
 
 1. `npm install`
