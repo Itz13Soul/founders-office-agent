@@ -44,3 +44,5 @@ Model output is a suggestion to verify. Not legal or financial advice. The demo 
 ## License
 
 Copyright (c) 2026 Divyansh Srivastava. All rights reserved. Viewing only; see LICENSE.
+
+Read the one-page [case study](CASE_STUDY.md).
