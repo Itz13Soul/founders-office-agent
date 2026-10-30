@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "../lib/track";
 import { useState } from "react";
 
 type C = { owner: string; what: string; due: string | null; quote: string };
@@ -24,8 +25,8 @@ export default function TryExtract() {
         body: JSON.stringify({ text, from, to, date }),
       });
       const data = (await res.json().catch(() => ({ error: "The server took too long." }))) as { commitments?: C[]; error?: string };
-      if (!res.ok || !data.commitments) setError(data.error ?? "Something went wrong.");
-      else setOut(data.commitments);
+      if (!res.ok || !data.commitments) { setError(data.error ?? "Something went wrong."); track("extract_error"); }
+      else { setOut(data.commitments); track("extract_run", { commitments: data.commitments.length }); }
     } catch {
       setError("Network error.");
     } finally {

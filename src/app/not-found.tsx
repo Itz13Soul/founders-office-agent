@@ -5,7 +5,7 @@ export default function NotFound() {
     <main className="mx-auto w-full max-w-3xl px-4 py-24 text-center">
       <p className="text-sm text-zinc-400">404</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight">This page does not exist</h1>
-      <Link href="/" className="mt-6 inline-block rounded-lg border border-white/15 px-4 py-2 text-sm hover:bg-white/5">Back to Founder's Office Agent</Link>
+      <Link href="/" className="mt-6 inline-block rounded-lg border border-white/15 px-4 py-2 text-sm hover:bg-white/5">Back to Founder&apos;s Office Agent</Link>
     </main>
   );
 }

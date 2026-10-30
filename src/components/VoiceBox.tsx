@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "../lib/track";
 import { useRef, useState, useSyncExternalStore } from "react";
 import type { VoiceItem } from "../lib/voice";
 
@@ -82,8 +83,8 @@ export default function VoiceBox({ examples }: { examples: string[] }) {
         items?: VoiceItem[];
         error?: string;
       };
-      if (!res.ok || !data.items) setError(data.error ?? "Something went wrong.");
-      else setResult({ english: data.english ?? "", items: data.items });
+      if (!res.ok || !data.items) { setError(data.error ?? "Something went wrong."); track("voice_error"); }
+      else { setResult({ english: data.english ?? "", items: data.items }); track("voice_processed", { items: data.items.length }); }
     } catch {
       setError("Network error.");
     } finally {

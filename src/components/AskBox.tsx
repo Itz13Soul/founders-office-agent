@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "../lib/track";
 import { useState } from "react";
 import type { Memo } from "../lib/memo";
 
@@ -26,8 +27,8 @@ export default function AskBox({ preset = "" }: { preset?: string }) {
         body: JSON.stringify({ question }),
       });
       const data = (await res.json().catch(() => ({ error: "The server took too long. Try again." }))) as { memo?: Memo; error?: string };
-      if (!res.ok || !data.memo) setError(data.error ?? "Something went wrong.");
-      else setMemo(data.memo);
+      if (!res.ok || !data.memo) { setError(data.error ?? "Something went wrong."); track("memo_error"); }
+      else { setMemo(data.memo); track("memo_generated"); }
     } catch {
       setError("Network error. Please try again.");
     } finally {
